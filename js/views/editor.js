@@ -97,8 +97,8 @@ const EditorView = (() => {
       });
       kids = `<div class="tn-kids">${ch}</div>`;
       kids += `<div style="display:flex;gap:6px;margin-top:8px;margin-left:12px" onclick="event.stopPropagation()">
-        <button class="btn btn-s" style="font-size:12px;padding:5px 12px" onclick="EditorView.add('${node.id}','item')">+ ${t('editor.addItem')}</button>
-        <button class="btn btn-s" style="font-size:12px;padding:5px 12px" onclick="EditorView.add('${node.id}','group')">+ ${t('editor.addGroup')}</button>
+        <button class="btn btn-s" id="ed-add-item-${node.id}" style="font-size:12px;padding:5px 12px" onclick="EditorView.add('${node.id}','item')">+ ${t('editor.addItem')}</button>
+        <button class="btn btn-s" id="ed-add-group-${node.id}" style="font-size:12px;padding:5px 12px" onclick="EditorView.add('${node.id}','group')">+ ${t('editor.addGroup')}</button>
       </div>`;
     }
 

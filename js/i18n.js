@@ -98,14 +98,21 @@ I18N.register('zh', {
     rename:'重命名', star:'收藏', unstar:'取消收藏', more:'更多',
   },
   onboarding: {
-    skip:'跳过', next:'下一步', done:'完成',
+    skip:'跳过', next:'下一步', done:'完成', go:'继续',
     steps:[
-      { title:'欢迎使用 iHateDDL', text:'一个帮助你管理大学课程 DDL 和成绩的工具。拿到课程大纲后，把信息录入进来，再也不怕忘记截止日期。' },
-      { title:'第一步：新建文件夹', text:'点击右下角 + 按钮，为本学期创建一个文件夹（如 2026Fall），按学期分类。' },
-      { title:'第二步：添加课程', text:'进入文件夹后，点击 + 新建课程，输入课程名称。' },
-      { title:'第三步：配置课程', text:'点击课程进入编辑器，添加 Final、Quiz、Assignment 等类别，设置各自权重。' },
-      { title:'第四步：查看日历', text:'所有设置了时间的作业都会出现在日历里，你可以看到距离 DDL 还有多少时间。' },
-      { title:'第五步：使用工具箱', text:'专注计时器帮助保持高效，分数规划功能让你看到需要考多少分才能达到目标。' },
+      { title:'欢迎使用 iHateDDL', text:'拿到课程大纲后，跟着引导把这学期的课录进来。点下面「继续」。' },
+      { title:'新建文件夹', text:'点亮起的 + 按钮，新建一个学期文件夹。' },
+      { title:'确认文件夹名', text:'名字已填好 2026Fall，点「确认」创建。' },
+      { title:'打开文件夹', text:'点这个文件夹进去。' },
+      { title:'新建课程', text:'点亮起的 + 按钮，新建一门课。' },
+      { title:'确认课程名', text:'名字已填好 exampleCourse001，点「确认」创建。' },
+      { title:'手动配置', text:'这次我们手动配，点「跳过」进入课程编辑。' },
+      { title:'添加 Final', text:'点「新建项」，自动加一个 Final，占 40%，截止 2027 年 1 月 1 日。' },
+      { title:'添加 Quiz', text:'点「新建分组」，自动加一个均分的 Quizzes 组，占 30%，含 Quiz1-3、丢弃最低 1 个。' },
+      { title:'添加 Assignment', text:'点「新建项」，自动加 Assignment，占剩余 20%。' },
+      { title:'添加 Bonus', text:'点「新建项」，自动加 Bonus 2%，加分项不计入 100% 上限。' },
+      { title:'查看日历', text:'点日历，设了时间的作业都在这里，能看到距离截止还有多久。' },
+      { title:'完成', text:'日历里可勾选完成或删除，删除的进回收站需手动清空（导出存档不含回收站）。点下面结束引导。' },
     ]
   }
 }, { label:'中文简体' });
@@ -184,14 +191,21 @@ I18N.register('en', {
     rename:'Rename', star:'Star', unstar:'Unstar', more:'More',
   },
   onboarding: {
-    skip:'Skip', next:'Next', done:'Done',
+    skip:'Skip', next:'Next', done:'Done', go:'Continue',
     steps:[
-      { title:'Welcome to iHateDDL', text:'A tool for managing course DDLs and grades. Enter your syllabus info and never miss a deadline again.' },
-      { title:'Step 1: Create a Folder', text:'Tap the + button to create a folder for this semester (e.g. 2026Fall).' },
-      { title:'Step 2: Add a Course', text:'Enter the folder and tap + to add a course.' },
-      { title:'Step 3: Configure', text:'Tap a course to open the editor. Add Final, Quiz, Assignment categories and set weights.' },
-      { title:'Step 4: Calendar', text:'All timed assignments appear in the Calendar with countdown to deadline.' },
-      { title:'Step 5: Tools', text:'Focus Timer keeps you productive. Score Planner shows what you need to reach your target.' },
+      { title:'Welcome to iHateDDL', text:'Got your syllabus? Follow along to enter this semester. Tap Continue below.' },
+      { title:'Create a Folder', text:'Tap the highlighted + button to make a semester folder.' },
+      { title:'Confirm Folder Name', text:'Name is prefilled as 2026Fall. Tap Confirm to create it.' },
+      { title:'Open the Folder', text:'Tap this folder to go inside.' },
+      { title:'Add a Course', text:'Tap the highlighted + button to add a course.' },
+      { title:'Confirm Course Name', text:'Name is prefilled as exampleCourse001. Tap Confirm.' },
+      { title:'Configure Manually', text:'We will set it up by hand. Tap Skip to open the course editor.' },
+      { title:'Add Final', text:'Tap "Add Item" — a Final worth 40%, due Jan 1 2027, is added.' },
+      { title:'Add Quiz', text:'Tap "Add Group" — a divided Quizzes group worth 30% with Quiz1-3, drop lowest 1.' },
+      { title:'Add Assignment', text:'Tap "Add Item" — an Assignment for the remaining 20%.' },
+      { title:'Add Bonus', text:'Tap "Add Item" — a 2% Bonus; bonus items are not capped at 100%.' },
+      { title:'Calendar', text:'Tap Calendar. Timed work shows here with a countdown to each deadline.' },
+      { title:'Done', text:'In Calendar you can complete or delete items; deleted ones go to Trash (empty it manually; exports exclude Trash). Tap below to finish.' },
     ]
   }
 }, { label:'English' });
