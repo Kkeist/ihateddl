@@ -118,9 +118,10 @@ function commitDateFlexible(raw, endOfDay) {
   if (!s) return { ok: true, clear: true };
 
   const digits = s.replace(/\D/g, '');
+  // 凑够 8 位数字（含从 YYYY-MM-DD 抽出的）唯一按 YYYYMMDD 解释：
+  // 合法就用，非法直接拒绝，绝不再落到宽松 new Date() 把 00000000 之类当成怪日期。
   if (digits.length === 8) {
-    const r = commitDateDigitsRaw(digits, endOfDay);
-    if (r.ok) return r;
+    return commitDateDigitsRaw(digits, endOfDay);
   }
 
   const ymd = s.match(/^(\d{4})[-/](\d{1,2})[-/](\d{1,2})$/);

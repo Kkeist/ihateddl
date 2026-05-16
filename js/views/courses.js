@@ -93,7 +93,7 @@ const CoursesView = (() => {
       'divider',
       { icon:'✕', label:t('common.delete'), danger:true,
         action() { Modal.confirm({ title:t('common.delete'),
-          text:t('courses.deleteConfirm',{name:c.name}), danger:true,
+          text:t('courses.deleteConfirm',{name:escHtml(c.name)}), danger:true,
           onConfirm() { Store.deleteCourse(id); render(); } }); } }
     ]);
   }

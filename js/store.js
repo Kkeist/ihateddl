@@ -125,8 +125,17 @@ const Store = (() => {
   }
 
   /* ---- Persist ---- */
+  // 存储空间写满时不抛崩、不假装成功：记 console.error + 给用户诚实提示 + 返回 false。
+  // 内存中的改动仍保留（本次会话可见），但用户知道这次没存住。
   function save() {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      return true;
+    } catch (e) {
+      console.error('Store.save failed (localStorage 写满或不可用)', e);
+      if (typeof Toast !== 'undefined') Toast.error(t('common.saveFail'));
+      return false;
+    }
   }
 
   /* ---- Reactivity ---- */

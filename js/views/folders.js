@@ -79,7 +79,7 @@ const FoldersView = (() => {
       'divider',
       { icon:'✕', label:t('common.delete'), danger:true,
         action() { Modal.confirm({ title:t('common.delete'),
-          text:t('folders.deleteConfirm',{name:f.name}), danger:true,
+          text:t('folders.deleteConfirm',{name:escHtml(f.name)}), danger:true,
           onConfirm() { Store.deleteFolder(id); render(); } }); } }
     ]);
   }

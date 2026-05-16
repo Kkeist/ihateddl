@@ -293,7 +293,7 @@ const EditorView = (() => {
       {icon:'↓',label:t('editor.down'),action(){Store.moveNodeDown(_cid,id);render();}},
     ];
     if(isRoot!=='true'){items.push('divider');items.push({icon:'✕',label:t('editor.del'),danger:true,action(){
-      Modal.confirm({title:t('common.delete'),text:`${t('editor.del')} "${n.name}"?`,danger:true,
+      Modal.confirm({title:t('common.delete'),text:`${t('editor.del')} "${escHtml(n.name)}"?`,danger:true,
         onConfirm(){Store.trashItem(id,_cid);_open.delete(id);render();Toast.success(t('editor.del'));}});}});}
     CtxMenu.show(e.clientX,e.clientY,items);
   }

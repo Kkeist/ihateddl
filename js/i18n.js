@@ -95,6 +95,7 @@ I18N.register('zh', {
   },
   common: {
     cancel:'取消', confirm:'确认', save:'保存', delete:'删除', badDate:'请输入有效日期：8 位 YYYYMMDD，或 YYYY-MM-DD',
+    saveFail:'保存失败：存储空间已满，这次改动未能存住',
     rename:'重命名', star:'收藏', unstar:'取消收藏', more:'更多',
   },
   onboarding: {
@@ -188,6 +189,7 @@ I18N.register('en', {
   },
   common: {
     cancel:'Cancel', confirm:'Confirm', save:'Save', delete:'Delete', badDate:'Enter a valid date: YYYYMMDD or YYYY-MM-DD',
+    saveFail:'Save failed: storage is full, this change was not saved',
     rename:'Rename', star:'Star', unstar:'Unstar', more:'More',
   },
   onboarding: {
