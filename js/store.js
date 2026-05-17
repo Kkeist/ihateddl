@@ -35,7 +35,7 @@ const Store = (() => {
   /* ---- Default State ---- */
   function defaultState() {
     return {
-      settings: { language: 'zh', theme: 'light', onboardingCompleted: false, languageChosen: false },
+      settings: { language: 'zh', theme: 'light', onboardingCompleted: false, languageChosen: false, notificationsEnabled: true },
       folders: [],
       trash: []
     };
@@ -48,7 +48,7 @@ const Store = (() => {
       type: 'group', groupType: groupType || 'custom',
       percentage: pct != null ? pct : 100,
       bonus: false, detail: '',
-      duration: { start: null, end: null, prepareStart: null, ddl: null },
+      duration: { start: null, end: null, prepareStart: null, ddl: null, reminder: null },
       milestones: [], itemDrop: 0,
       children: [], status: 'not-started'
     };
@@ -62,7 +62,7 @@ const Store = (() => {
       bonus: false,
       scoreCurr: null, scoreOutOf: null,
       detail: '',
-      duration: { start: null, end: null, prepareStart: null, ddl: null },
+      duration: { start: null, end: null, prepareStart: null, ddl: null, reminder: null },
       milestones: [], status: 'not-started',
       altPlan: null
     };
@@ -73,7 +73,7 @@ const Store = (() => {
       id: uuid(), name: courseName,
       type: 'group', groupType: 'custom',
       percentage: 100, bonus: false, detail: '',
-      duration: { start: null, end: null, prepareStart: null, ddl: null },
+      duration: { start: null, end: null, prepareStart: null, ddl: null, reminder: null },
       milestones: [], itemDrop: 0,
       children: [], status: 'not-started'
     };
@@ -98,6 +98,7 @@ const Store = (() => {
 
   function migrateState(s) {
     if (!s.settings) s.settings = defaultState().settings;
+    if (s.settings.notificationsEnabled === undefined) s.settings.notificationsEnabled = true;
     if (!Array.isArray(s.folders)) s.folders = [];
     if (!Array.isArray(s.trash)) s.trash = [];
     s.folders.forEach(f => {
@@ -110,7 +111,8 @@ const Store = (() => {
   }
 
   function migrateNode(node) {
-    if (!node.duration) node.duration = { start: null, end: null, prepareStart: null, ddl: null };
+    if (!node.duration) node.duration = { start: null, end: null, prepareStart: null, ddl: null, reminder: null };
+    else if (node.duration.reminder === undefined) node.duration.reminder = null;
     if (!Array.isArray(node.milestones)) node.milestones = [];
     if (!node.status) node.status = 'not-started';
     if (node.type === 'group') {
@@ -429,6 +431,11 @@ const Store = (() => {
     notify({ type: 'settings:langChosen' });
   }
 
+  function setNotificationsEnabled(on) {
+    state.settings.notificationsEnabled = !!on;
+    notify({ type: 'settings:notifications', on: !!on });
+  }
+
   /* ---- Import / Export ---- */
   function exportData() {
     const data = deepClone(state);
@@ -502,7 +509,7 @@ const Store = (() => {
     addNode, deleteNode, renameNode, updateNode, copyNode,
     moveNodeUp, moveNodeDown,
     trashItem, restoreFromTrash, emptyTrash,
-    setLanguage, setTheme, completeOnboarding, setLanguageChosen,
+    setLanguage, setTheme, completeOnboarding, setLanguageChosen, setNotificationsEnabled,
     exportData, importData, clearAll,
     sortedFolders, sortedCourses,
     countItems,

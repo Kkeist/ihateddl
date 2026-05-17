@@ -30,6 +30,15 @@ const SettingsView = (() => {
         </div>
       </div>
 
+      <div class="sec-label">${t('settings.notify')}</div>
+      <div class="st-sec">
+        <div class="st-row">
+          <div><div class="st-row-l">${t('settings.notifications')}</div>
+            <div style="font-size:12px;color:var(--t3);margin-top:2px">${t('settings.notificationsDesc')}</div></div>
+          <label class="tgl"><input type="checkbox" ${s.notificationsEnabled?'checked':''} onchange="SettingsView.setNotif(this.checked)"><span class="tgl-t"></span></label>
+        </div>
+      </div>
+
       <div class="sec-label">${t('settings.data')}</div>
       <div class="st-sec">
         <div class="st-row" style="cursor:pointer" onclick="SettingsView.exportData()">
@@ -57,6 +66,7 @@ const SettingsView = (() => {
   function exportData(){Store.exportData();Toast.success(t('settings.export'));}
   function importData(){const i=document.createElement('input');i.type='file';i.accept='.json';i.onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=ev=>{Store.importData(ev.target.result)?(Toast.success(t('settings.importOk')),App.rerender()):Toast.error(t('settings.importErr'));};r.readAsText(f);};i.click();}
   function clearData(){Modal.confirm({title:t('settings.clear'),text:t('settings.clearConfirm'),danger:true,onConfirm(){Store.clearAll();App.rerender();}});}
+  function setNotif(on){ Store.setNotificationsEnabled(on); if(on && typeof Notify!=='undefined') Notify.ensurePermission(); }
 
-  return {render,setLang,setTheme,exportData,importData,clearData};
+  return {render,setLang,setTheme,exportData,importData,clearData,setNotif};
 })();

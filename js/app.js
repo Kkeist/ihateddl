@@ -98,6 +98,8 @@ const App = (() => {
         CtxMenu.hide();
       }
     });
+
+    if (typeof Notify !== 'undefined') Notify.init();
   }
 
   function init() {

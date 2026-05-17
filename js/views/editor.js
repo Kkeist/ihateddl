@@ -162,6 +162,10 @@ const EditorView = (() => {
     }
     const d=node.duration||{};
     const dl=d.ddl||d.end;
+    const _rm=d.reminder;
+    const rmD=_rm!=null?Math.floor(_rm/86400000):'';
+    const rmH=_rm!=null?Math.floor((_rm%86400000)/3600000):'';
+    const rmM=_rm!=null?Math.floor((_rm%3600000)/60000):'';
     h += `<div class="fld" style="flex-direction:column;align-items:flex-start;gap:6px">
       <span class="fld-l">${t('editor.duration')}</span>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;width:100%" onclick="event.stopPropagation()">
@@ -183,6 +187,19 @@ const EditorView = (() => {
           </div>
           <div id="ed-cal-${node.id}-deadline" class="ed-mini-cal" style="display:none"></div>
         </div>
+      </div>
+      <div style="width:100%;margin-top:2px" onclick="event.stopPropagation()">
+        <div style="font-size:10px;color:var(--t3);font-weight:600;margin-bottom:3px">${t('editor.reminder')}</div>
+        <div style="display:flex;align-items:center;gap:5px;flex-wrap:wrap">
+          <span style="font-size:12px;color:var(--t2)">${t('editor.reminderBefore')}</span>
+          <input type="number" class="fi" min="0" max="999" inputmode="numeric" style="width:54px;padding:5px 4px;text-align:center" placeholder="0" value="${rmD}" id="ed-rem-${node.id}-d" onchange="EditorView.setReminder('${node.id}')">
+          <span style="font-size:12px;color:var(--t2)">${t('editor.reminderDays')}</span>
+          <input type="number" class="fi" min="0" max="23" inputmode="numeric" style="width:54px;padding:5px 4px;text-align:center" placeholder="0" value="${rmH}" id="ed-rem-${node.id}-h" onchange="EditorView.setReminder('${node.id}')">
+          <span style="font-size:12px;color:var(--t2)">${t('editor.reminderHours')}</span>
+          <input type="number" class="fi" min="0" max="59" inputmode="numeric" style="width:54px;padding:5px 4px;text-align:center" placeholder="0" value="${rmM}" id="ed-rem-${node.id}-m" onchange="EditorView.setReminder('${node.id}')">
+          <span style="font-size:12px;color:var(--t2)">${t('editor.reminderMins')}</span>
+        </div>
+        <div style="font-size:10px;color:var(--t3);margin-top:3px">${dl?t('editor.reminderHint'):t('editor.reminderNeedDdl')}</div>
       </div>
       <details class="dur-prep" ${d.prepareStart?'open':''} onclick="event.stopPropagation()">
         <summary>${t('editor.prepareOptional')}</summary>
@@ -272,6 +289,23 @@ const EditorView = (() => {
     Store.save(); Store.notify({type:'node:update',courseId:_cid,nodeId:id});
     render();
   }
+  // 提醒提前量：读 天/时/分 三个输入框，三个都空＝不提醒(null)，否则存提前的毫秒数(0=截止时刻)
+  function setReminder(id) {
+    const g = k => { const e=document.getElementById(`ed-rem-${id}-${k}`); return e?e.value.trim():''; };
+    const ds=g('d'), hs=g('h'), ms=g('m');
+    const r=Store.getCourse(_cid); if(!r)return;
+    const n=Store.findNode(r.course.rootGroup,id); if(!n)return;
+    if(!n.duration) n.duration={};
+    if(ds===''&&hs===''&&ms===''){
+      n.duration.reminder=null;
+    } else {
+      const dd=Math.max(0,parseInt(ds,10)||0);
+      const hh=Math.max(0,parseInt(hs,10)||0);
+      const mm=Math.max(0,parseInt(ms,10)||0);
+      n.duration.reminder=((dd*86400)+(hh*3600)+(mm*60))*1000;
+    }
+    Store.save(); Store.notify({type:'node:update',courseId:_cid,nodeId:id});
+  }
   function rsc() {
     const r=Store.getCourse(_cid); if(!r)return;
     const sc=calcNodeScore(r.course.rootGroup,_plan?_po:{});
@@ -335,5 +369,5 @@ const EditorView = (() => {
   function updMs(nid,mid,f,v) { const r=Store.getCourse(_cid);if(!r)return;const n=Store.findNode(r.course.rootGroup,nid);if(!n||!n.milestones)return;const m=n.milestones.find(x=>x.id===mid);if(!m)return;f==='ts'?(m.ts=v?parseDateInput(v):null):(m[f]=v);Store.save(); }
   function delMs(nid,mid) { const r=Store.getCourse(_cid);if(!r)return;const n=Store.findNode(r.course.rootGroup,nid);if(!n)return;n.milestones=(n.milestones||[]).filter(m=>m.id!==mid);Store.save();render(); }
 
-  return { render,tog,uf,dateBlurKind,msDateBlur,clrPrep,add,nmenu,togglePlan,setPlan,toggleVm,toggleMiniCal,addMs,updMs,delMs,getCourseId(){return _cid;} };
+  return { render,tog,uf,dateBlurKind,msDateBlur,clrPrep,setReminder,add,nmenu,togglePlan,setPlan,toggleVm,toggleMiniCal,addMs,updMs,delMs,getCourseId(){return _cid;} };
 })();

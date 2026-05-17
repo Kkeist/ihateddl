@@ -8,10 +8,12 @@
     "build:apk": "node scripts/sync-www.mjs && cap sync android"
   },
   "devDependencies": {
+    "@capacitor/assets": "^3.0.5",
     "@capacitor/cli": "^7.0.0"
   },
   "dependencies": {
+    "@capacitor/android": "^7.0.0",
     "@capacitor/core": "^7.0.0",
-    "@capacitor/android": "^7.0.0"
+    "@capacitor/local-notifications": "^7.0.6"
   }
 }
