@@ -168,7 +168,7 @@ const EditorView = (() => {
         <div>
           <div style="font-size:10px;color:var(--t3);font-weight:600;margin-bottom:3px">${t('editor.from')}</div>
           <div style="display:flex;gap:4px;align-items:center">
-            <input type="text" class="fi fi-date" id="ed-inp-${node.id}-start" style="padding:5px 8px;font-size:12px;flex:1;min-width:0" maxlength="16" autocomplete="off" placeholder="${t('editor.dateDigits')}" value="${formatDateDigits(d.start)}"
+            <input type="text" class="fi fi-date" id="ed-inp-${node.id}-start" style="padding:5px 8px;flex:1;min-width:0" maxlength="16" autocomplete="off" placeholder="${t('editor.dateDigits')}" value="${formatDateDigits(d.start)}"
               onblur="EditorView.dateBlurKind('${node.id}','start',this)">
             <button type="button" class="hdr-btn" style="flex-shrink:0;width:32px;height:32px" title="${t('editor.pickCal')}" onclick="event.stopPropagation();EditorView.toggleMiniCal('${node.id}','start')">${_calSvg}</button>
           </div>
@@ -177,7 +177,7 @@ const EditorView = (() => {
         <div>
           <div style="font-size:10px;color:var(--err);font-weight:600;margin-bottom:3px">${t('editor.ddl')}</div>
           <div style="display:flex;gap:4px;align-items:center">
-            <input type="text" class="fi fi-date" id="ed-inp-${node.id}-deadline" style="padding:5px 8px;font-size:12px;flex:1;min-width:0;border-color:var(--err)" maxlength="16" autocomplete="off" placeholder="${t('editor.dateDigits')}" value="${formatDateDigits(dl)}"
+            <input type="text" class="fi fi-date" id="ed-inp-${node.id}-deadline" style="padding:5px 8px;flex:1;min-width:0;border-color:var(--err)" maxlength="16" autocomplete="off" placeholder="${t('editor.dateDigits')}" value="${formatDateDigits(dl)}"
               onblur="EditorView.dateBlurKind('${node.id}','deadline',this)">
             <button type="button" class="hdr-btn" style="flex-shrink:0;width:32px;height:32px" title="${t('editor.pickCal')}" onclick="event.stopPropagation();EditorView.toggleMiniCal('${node.id}','deadline')">${_calSvg}</button>
           </div>
@@ -191,7 +191,7 @@ const EditorView = (() => {
           <div style="display:flex;align-items:flex-start;gap:8px;flex-wrap:wrap">
             <div style="flex:1;min-width:140px;max-width:100%">
               <div style="display:flex;gap:4px;align-items:center">
-                <input type="text" class="fi fi-date" id="ed-inp-${node.id}-prepare" style="padding:5px 8px;font-size:12px;flex:1;min-width:0" maxlength="16" autocomplete="off" placeholder="${t('editor.dateDigits')}" value="${formatDateDigits(d.prepareStart)}"
+                <input type="text" class="fi fi-date" id="ed-inp-${node.id}-prepare" style="padding:5px 8px;flex:1;min-width:0" maxlength="16" autocomplete="off" placeholder="${t('editor.dateDigits')}" value="${formatDateDigits(d.prepareStart)}"
                   onblur="EditorView.dateBlurKind('${node.id}','prepare',this)">
                 <button type="button" class="hdr-btn" style="flex-shrink:0;width:32px;height:32px" title="${t('editor.pickCal')}" onclick="event.stopPropagation();EditorView.toggleMiniCal('${node.id}','prepare')">${_calSvg}</button>
               </div>
@@ -214,13 +214,13 @@ const EditorView = (() => {
       ${ms.map(m=>`<div style="display:flex;align-items:flex-start;gap:6px;margin-top:6px;width:100%;flex-wrap:wrap">
         <div style="flex:0 0 auto;min-width:120px">
           <div style="display:flex;gap:4px;align-items:center">
-            <input type="text" class="fi fi-date" id="ed-inp-${node.id}-ms-${m.id}" style="padding:4px 6px;font-size:12px;flex:1;min-width:0" maxlength="16" autocomplete="off" placeholder="${t('editor.dateDigits')}" value="${formatDateDigits(m.ts)}"
+            <input type="text" class="fi fi-date" id="ed-inp-${node.id}-ms-${m.id}" style="padding:4px 6px;flex:1;min-width:0" maxlength="16" autocomplete="off" placeholder="${t('editor.dateDigits')}" value="${formatDateDigits(m.ts)}"
               onblur="EditorView.msDateBlur('${node.id}','${m.id}',this)">
             <button type="button" class="hdr-btn" style="flex-shrink:0;width:30px;height:30px" title="${t('editor.pickCal')}" onclick="event.stopPropagation();EditorView.toggleMiniCal('${node.id}','ms','${m.id}')">${_calSvg}</button>
           </div>
           <div id="ed-cal-${node.id}-ms-${m.id}" class="ed-mini-cal" style="display:none"></div>
         </div>
-        <input type="text" class="fi" style="padding:4px 6px;font-size:12px;flex:1;min-width:100px" value="${escHtml(m.name)}" placeholder="${t('editor.milestone')}"
+        <input type="text" class="fi" style="padding:4px 6px;flex:1;min-width:100px" value="${escHtml(m.name)}" placeholder="${t('editor.milestone')}"
           oninput="EditorView.updMs('${node.id}','${m.id}','name',this.value)">
         <button class="btn-icon" style="color:var(--err);font-size:13px;flex-shrink:0" onclick="EditorView.delMs('${node.id}','${m.id}')">✕</button>
       </div>`).join('')}</div>`;

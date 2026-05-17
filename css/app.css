@@ -51,6 +51,8 @@
   --ff:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif;
   --fs-xs:11px; --fs-sm:12px; --fs-md:13px; --fs-base:14px;
   --fs-lg:16px; --fs-xl:20px; --fs-2xl:28px;
+  /* 所有用户输入控件统一 16px：移动端聚焦不触发自动缩放，桌面端也清晰 */
+  --fs-input:16px;
 
   /* Motion */
   --ease:cubic-bezier(.4,0,.2,1); --dur:.18s;
@@ -312,7 +314,7 @@ img,svg{display:block}
 @keyframes inlineSlide{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
 .inline-add input,.inline-add .inline-add-inp{
   width:100%;border:none;background:var(--srf-a);border-radius:var(--r-xs);
-  padding:10px 12px;font-size:var(--fs-base);font-weight:600;outline:none;color:var(--t1);
+  padding:10px 12px;font-size:var(--fs-input);font-weight:600;outline:none;color:var(--t1);
   border:1px solid var(--bd-s);
   transition:border-color var(--dur),box-shadow var(--dur);
 }
@@ -406,7 +408,7 @@ img,svg{display:block}
 .fi{
   width:100%;padding:9px 13px;
   border:1.5px solid var(--bd);border-radius:var(--r-xs);
-  background:var(--srf);font-size:var(--fs-base);outline:none;
+  background:var(--srf);font-size:var(--fs-input);outline:none;
   transition:all var(--dur) var(--ease);
 }
 .fi:focus{border-color:var(--ac);box-shadow:0 0 0 3px var(--ac-bg),0 2px 8px rgba(212,114,78,.06)}
@@ -416,7 +418,7 @@ img,svg{display:block}
 
 .fsel{
   width:100%;padding:9px 13px;border:1.5px solid var(--bd);border-radius:var(--r-xs);
-  background:var(--srf);font-size:var(--fs-base);outline:none;cursor:pointer;
+  background:var(--srf);font-size:var(--fs-input);outline:none;cursor:pointer;
   transition:all var(--dur) var(--ease);
 }
 .fsel:focus{border-color:var(--ac);box-shadow:0 0 0 3px var(--ac-bg)}
@@ -424,7 +426,7 @@ img,svg{display:block}
 
 .fta{
   width:100%;padding:9px 13px;border:1.5px solid var(--bd);border-radius:var(--r-xs);
-  background:var(--srf);font-size:var(--fs-base);resize:vertical;min-height:68px;outline:none;
+  background:var(--srf);font-size:var(--fs-input);resize:vertical;min-height:68px;outline:none;
   transition:all var(--dur) var(--ease);
 }
 .fta:focus{border-color:var(--ac);box-shadow:0 0 0 3px var(--ac-bg),0 2px 8px rgba(212,114,78,.06)}
@@ -649,14 +651,14 @@ img,svg{display:block}
 .dur-prep>summary:hover{background:var(--srf-h)}
 .dur-prep .dur-prep-in{padding:0 12px 12px}
 
-.il{background:transparent;border:none;border-bottom:1.5px solid var(--bd);padding:3px 4px;font-size:var(--fs-md);width:100%;outline:none;transition:all var(--dur) var(--ease)}
+.il{background:transparent;border:none;border-bottom:1.5px solid var(--bd);padding:3px 4px;font-size:var(--fs-input);width:100%;outline:none;transition:all var(--dur) var(--ease)}
 .il:focus{border-color:var(--ac);box-shadow:0 2px 0 var(--ac-bg)}
 .il:hover:not(:focus){border-color:rgba(80,60,30,.15)}
 
 .sc-in{display:flex;align-items:center;gap:5px}
 .sc-in input{
   width:54px;padding:5px 6px;border:1.5px solid var(--bd);border-radius:var(--r-xs);
-  text-align:center;font-size:var(--fs-md);font-weight:600;background:var(--srf);outline:none;
+  text-align:center;font-size:var(--fs-input);font-weight:600;background:var(--srf);outline:none;
   transition:all var(--dur) var(--ease);
 }
 .sc-in input:focus{border-color:var(--ac);box-shadow:0 0 0 3px var(--ac-bg)}

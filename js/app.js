@@ -32,14 +32,11 @@ const App = (() => {
   function updHdr(id) {
     const t_ = document.getElementById('header-title');
     const bb = document.getElementById('btn-back');
-    let title = 'iHateDDL', back = false;
-    if (id==='calendar')  title = t('calendar.title');
-    else if (id==='folders')  title = t('folders.title');
-    else if (id==='courses') { const f=Store.getFolder(_ctx.folderId); title=f?f.name:t('courses.title'); back=true; }
-    else if (id==='editor')  { const r=Store.getCourse(_ctx.courseId); title=r?r.course.name:''; back=true; }
-    else if (id==='tools')    title = t('tools.title');
-    else if (id==='settings') title = t('settings.title');
-    if (t_) t_.textContent = title;
+    // 移动端顶栏是全局品牌栏（桌面端对应 nav-bar 的 iHateDDL logo）。
+    // 页面级标题由各视图正文的面包屑/页头负责，顶栏不再重复页面名，
+    // 否则移动端会出现顶栏"文件夹"+正文"文件夹"两个相同标题。
+    const back = (id === 'courses' || id === 'editor');
+    if (t_) t_.textContent = 'iHateDDL';
     if (bb) bb.classList.toggle('hidden', !back);
   }
 
