@@ -1,0 +1,17 @@
+{
+  "name": "ihateddl",
+  "version": "1.0.0",
+  "private": true,
+  "description": "iHateDDL — 大学课程 DDL 与成绩管理 (纯前端，Capacitor 打包 Android)",
+  "scripts": {
+    "sync:www": "node scripts/sync-www.mjs",
+    "build:apk": "node scripts/sync-www.mjs && cap sync android"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^7.0.0"
+  },
+  "dependencies": {
+    "@capacitor/core": "^7.0.0",
+    "@capacitor/android": "^7.0.0"
+  }
+}

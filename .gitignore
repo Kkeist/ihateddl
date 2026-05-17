@@ -1,0 +1,5 @@
+# 依赖与打包产物（源码在根目录，www/android 由脚本/Capacitor 重新生成）
+node_modules/
+www/
+android/
+*.apk
