@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <!-- 透明前景：内容收在中心安全区(~60%)，外围留给系统自适应裁切 -->
+  <g font-family="'Segoe UI','Inter',system-ui,Arial,sans-serif" font-weight="800" text-anchor="middle" fill="#fffcf5">
+    <text x="512" y="486" font-size="156" letter-spacing="-4">iHate</text>
+    <text x="512" y="672" font-size="224" letter-spacing="-8">DDL</text>
+  </g>
+</svg>
