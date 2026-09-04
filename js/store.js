@@ -85,11 +85,19 @@ const Store = (() => {
       const raw = localStorage.getItem(STORAGE_KEY);
       if (raw) {
         state = JSON.parse(raw);
-        // migrate: ensure all nodes have required fields
         migrateState(state);
       } else {
         state = defaultState();
       }
+      try {
+        const urlParams = (typeof window !== 'undefined' && window.location && window.location.search) ? new URLSearchParams(window.location.search) : null;
+        const pLang = urlParams ? urlParams.get('lang') : null;
+        if (pLang === 'en' || pLang === 'zh') {
+          state.settings.language = pLang;
+          state.settings.languageChosen = true;
+          document.body.dataset.lang = pLang;
+        }
+      } catch (e) {}
     } catch (e) {
       console.warn('Store init error', e);
       state = defaultState();
