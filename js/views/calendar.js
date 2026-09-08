@@ -144,7 +144,7 @@ const CalendarView = (() => {
       const ddl=item.node.duration&&(item.node.duration.ddl||item.node.duration.end);
       if(!ddl)return;const k=dk(ddl);if(!gs[k])gs[k]={ts:startOfDay(ddl),items:[]};gs[k].items.push(item);
     });
-    const keys=Object.keys(gs).sort(),today=startOfDay(Date.now());
+    const keys=Object.keys(gs).sort((a,b)=>gs[a].ts-gs[b].ts),today=startOfDay(Date.now());
     if(keys.length===0){c.innerHTML=`<div class="empty"><div class="empty-title">${t('calendar.noTasks')}</div></div>`;return;}
     let h='';
     keys.forEach(k=>{
@@ -287,7 +287,7 @@ const CalendarView = (() => {
   }
   function confirmEmpty(){Modal.confirm({title:t('calendar.emptyTrash'),text:t('calendar.emptyConfirm'),danger:true,onConfirm(){Store.emptyTrash();rTrash();}});}
 
-  function dk(ts){const d=new Date(ts);return `${d.getFullYear()}-${d.getMonth()}-${d.getDate()}`;}
+  function dk(ts){const d=new Date(ts),p=n=>String(n).padStart(2,'0');return `${d.getFullYear()}-${p(d.getMonth()+1)}-${p(d.getDate())}`;}
 
   return {render,setMode,toggleTrash,pm,nm,sd,te,markDone,restoreS,showPost,showAlt,clrAlt,restoreT,confirmEmpty,toggleFilter,toggleFilterAll,openModalMiniCal};
 })();
