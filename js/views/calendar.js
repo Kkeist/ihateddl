@@ -1,5 +1,5 @@
 const CalendarView = (() => {
-  let _mode='month', _vd=new Date(), _sel=null, _showTrash=false, _exp=new Set();
+  let _mode='month', _vd=new Date(), _sel=startOfDay(Date.now()), _showTrash=false, _exp=new Set(), _filterOpen=false;
   const _miniCalSvg = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>';
   let _filters = {}; // { folderId: true, courseId: true } — checked = shown
 
@@ -30,11 +30,19 @@ const CalendarView = (() => {
     return _filters['f_'+item.folder.id]&&_filters['c_'+item.course.id];
   }
 
+  function toggleFilterPanel(){_filterOpen=!_filterOpen;render();}
+
   function renderFilterPanel() {
     initFilters();
     const folders=Store.sortedFolders();
     const allOn=Object.values(_filters).every(v=>v);
-    let h=`<div class="filter-panel" style="margin-bottom:14px">
+    const on=Object.values(_filters).filter(Boolean).length,tot=Object.keys(_filters).length;
+    let h=`<button class="filter-toggle ${_filterOpen?'on':''}" onclick="CalendarView.toggleFilterPanel()">
+      <span class="chv">&rsaquo;</span><span>${t('calendar.filter')}</span>
+      <span class="cnt">${allOn?t('calendar.allFolders'):`${on}/${tot}`}</span>
+    </button>`;
+    if(!_filterOpen)return h;
+    h+=`<div class="filter-panel" style="margin-bottom:14px">
       <div class="filter-row" onclick="CalendarView.toggleFilterAll()">
         <div class="filter-cb ${allOn?'on':''}">✓</div>
         <span style="font-weight:600">${t('calendar.allFolders')}</span>
@@ -92,16 +100,12 @@ const CalendarView = (() => {
     }
     left+='</div></div>';
 
-    let right='';
-    if(_sel){
-      const di=dm[dk(_sel)]||[];
-      const lang=document.body.dataset.lang||'zh';
-      right+=`<div class="sec-label">${formatDate(_sel,lang)}</div>`;
-      if(di.length===0) right+=`<div style="color:var(--t3);font-size:13px;padding:20px 0;text-align:center">${t('calendar.noTasks')}</div>`;
-      else di.forEach(it=>{right+=ri(it);});
-    } else {
-      right=`<div style="color:var(--t3);font-size:13px;padding:40px 0;text-align:center">${t('calendar.noTasks')}</div>`;
-    }
+    const lang=document.body.dataset.lang||'zh';
+    const selTs=_sel||startOfDay(Date.now());
+    const di=dm[dk(selTs)]||[];
+    let right=`<div class="sec-label">${dk(selTs)===tk?t('calendar.today')+' · ':''}${formatDate(selTs,lang)}</div>`;
+    if(di.length===0) right+=`<div class="cal-detail-card"><div class="cal-detail-empty">${t('calendar.noTasks')}</div></div>`;
+    else di.forEach(it=>{right+=ri(it);});
 
     c.innerHTML=`<div class="cal-desk"><div>${left}</div><div class="cal-detail">${right}</div></div>`;
   }
@@ -289,5 +293,5 @@ const CalendarView = (() => {
 
   function dk(ts){const d=new Date(ts),p=n=>String(n).padStart(2,'0');return `${d.getFullYear()}-${p(d.getMonth()+1)}-${p(d.getDate())}`;}
 
-  return {render,setMode,toggleTrash,pm,nm,sd,te,markDone,restoreS,showPost,showAlt,clrAlt,restoreT,confirmEmpty,toggleFilter,toggleFilterAll,openModalMiniCal};
+  return {render,setMode,toggleTrash,pm,nm,sd,te,markDone,restoreS,showPost,showAlt,clrAlt,restoreT,confirmEmpty,toggleFilter,toggleFilterAll,toggleFilterPanel,openModalMiniCal};
 })();

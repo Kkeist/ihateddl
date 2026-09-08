@@ -82,7 +82,7 @@ const EditorView = (() => {
 
     const shownPct = share != null ? Math.round(share * 100) / 100 : node.percentage;
     const pctD = !isRoot ? (node.bonus
-      ? `<span class="chip" style="font-size:10px">+${node.percentage}%</span>`
+      ? `<span class="chip" style="font-size:var(--fs-xs)">+${node.percentage}%</span>`
       : `<span class="tn-pct">${shownPct}%</span>`) : '';
     const scD = ss ? `<span class="tn-score" style="color:${scoreColor(sc)}">${ss}</span>` : '';
 
@@ -95,7 +95,7 @@ const EditorView = (() => {
       (node.children||[]).forEach(c => {
         const drop = di.droppedIds&&di.droppedIds.has(c.id);
         ch += `<div style="${drop?'opacity:.4':''}">`;
-        if (drop) ch += `<div style="font-size:10px;color:var(--t3);font-weight:600;margin-bottom:2px">${t('editor.dropped')}</div>`;
+        if (drop) ch += `<div class="sub-l" style="margin-bottom:2px">${t('editor.dropped')}</div>`;
         ch += rn(c,false,c.bonus?null:share) + '</div>';
       });
       kids = `<div class="tn-kids">${ch}</div>`;
@@ -171,9 +171,9 @@ const EditorView = (() => {
     const rmM=_rm!=null?Math.floor((_rm%3600000)/60000):'';
     h += `<div class="fld" style="flex-direction:column;align-items:flex-start;gap:6px">
       <span class="fld-l">${t('editor.duration')}</span>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;width:100%" onclick="event.stopPropagation()">
+      <div class="dur-grid" onclick="event.stopPropagation()">
         <div>
-          <div style="font-size:10px;color:var(--t3);font-weight:600;margin-bottom:3px">${t('editor.from')}</div>
+          <div class="sub-l">${t('editor.from')}</div>
           <div style="display:flex;gap:4px;align-items:center">
             <input type="text" class="fi fi-date" id="ed-inp-${node.id}-start" style="padding:5px 8px;flex:1;min-width:0" maxlength="16" autocomplete="off" placeholder="${t('editor.dateDigits')}" value="${formatDateDigits(d.start)}"
               onblur="EditorView.dateBlurKind('${node.id}','start',this)">
@@ -182,9 +182,9 @@ const EditorView = (() => {
           <div id="ed-cal-${node.id}-start" class="ed-mini-cal" style="display:none"></div>
         </div>
         <div>
-          <div style="font-size:10px;color:var(--err);font-weight:600;margin-bottom:3px">${t('editor.ddl')}</div>
+          <div class="sub-l ddl">${t('editor.ddl')}</div>
           <div style="display:flex;gap:4px;align-items:center">
-            <input type="text" class="fi fi-date" id="ed-inp-${node.id}-deadline" style="padding:5px 8px;flex:1;min-width:0;border-color:var(--err)" maxlength="16" autocomplete="off" placeholder="${t('editor.dateDigits')}" value="${formatDateDigits(dl)}"
+            <input type="text" class="fi fi-date" id="ed-inp-${node.id}-deadline" style="padding:5px 8px;flex:1;min-width:0" maxlength="16" autocomplete="off" placeholder="${t('editor.dateDigits')}" value="${formatDateDigits(dl)}"
               onblur="EditorView.dateBlurKind('${node.id}','deadline',this)">
             <button type="button" class="hdr-btn" style="flex-shrink:0;width:32px;height:32px" title="${t('editor.pickCal')}" onclick="event.stopPropagation();EditorView.toggleMiniCal('${node.id}','deadline')">${_calSvg}</button>
           </div>
@@ -192,7 +192,7 @@ const EditorView = (() => {
         </div>
       </div>
       <div style="width:100%;margin-top:2px" onclick="event.stopPropagation()">
-        <div style="font-size:10px;color:var(--t3);font-weight:600;margin-bottom:3px">${t('editor.reminder')}</div>
+        <div class="sub-l">${t('editor.reminder')}</div>
         <div style="display:flex;align-items:center;gap:5px;flex-wrap:wrap">
           <span style="font-size:12px;color:var(--t2)">${t('editor.reminderBefore')}</span>
           <input type="number" class="fi" min="0" max="999" inputmode="numeric" style="width:54px;padding:5px 4px;text-align:center" placeholder="0" value="${rmD}" id="ed-rem-${node.id}-d" onchange="EditorView.setReminder('${node.id}')">
@@ -202,12 +202,12 @@ const EditorView = (() => {
           <input type="number" class="fi" min="0" max="59" inputmode="numeric" style="width:54px;padding:5px 4px;text-align:center" placeholder="0" value="${rmM}" id="ed-rem-${node.id}-m" onchange="EditorView.setReminder('${node.id}')">
           <span style="font-size:12px;color:var(--t2)">${t('editor.reminderMins')}</span>
         </div>
-        <div style="font-size:10px;color:var(--t3);margin-top:3px">${dl?t('editor.reminderHint'):t('editor.reminderNeedDdl')}</div>
+        <div style="font-size:var(--fs-xs);color:var(--t3);margin-top:4px">${dl?t('editor.reminderHint'):t('editor.reminderNeedDdl')}</div>
       </div>
       <details class="dur-prep" ${d.prepareStart?'open':''} onclick="event.stopPropagation()">
         <summary>${t('editor.prepareOptional')}</summary>
         <div class="dur-prep-in">
-          <div style="font-size:10px;color:var(--t3);font-weight:600;margin-bottom:3px">${t('editor.prepare')}</div>
+          <div class="sub-l">${t('editor.prepare')}</div>
           <div style="display:flex;align-items:flex-start;gap:8px;flex-wrap:wrap">
             <div style="flex:1;min-width:140px;max-width:100%">
               <div style="display:flex;gap:4px;align-items:center">
