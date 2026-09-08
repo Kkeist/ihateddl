@@ -4,3 +4,4 @@ www/
 android/
 *.apk
 assets/*.png
+!dist/iHateDDL.apk

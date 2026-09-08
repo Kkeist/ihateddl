@@ -9,6 +9,7 @@ const SettingsView = (() => {
       {id:'ocean',l:t('settings.themes.ocean'),c1:'#ddeef4',c2:'#2d8fa8'},
     ];
     const langs=I18N.list();
+    const nativeApp=typeof Notify!=='undefined'&&Notify.isNative();
 
     el.innerHTML=`
       <div class="pg-hdr"><h2 class="heading-lg">${t('settings.title')}</h2></div>
@@ -49,6 +50,13 @@ const SettingsView = (() => {
           <span class="st-row-l" style="color:var(--err)">${t('settings.clear')}</span><span class="st-row-r">→</span></div>
       </div>
 
+      ${nativeApp?'':`
+      <div class="sec-label">${t('settings.android')}</div>
+      <div class="st-sec">
+        <div class="st-row" style="cursor:pointer" onclick="SettingsView.downloadApk()">
+          <span class="st-row-l">${t('settings.downloadApk')}</span><span class="st-row-r">→</span></div>
+      </div>`}
+
       <div class="sec-label">${t('settings.info')}</div>
       <div class="st-sec">
         <div class="st-row"><span class="st-row-l">${t('settings.about')}</span><span class="st-row-r">${t('settings.version')}</span></div>
@@ -67,6 +75,7 @@ const SettingsView = (() => {
   function importData(){const i=document.createElement('input');i.type='file';i.accept='.json';i.onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=ev=>{Store.importData(ev.target.result)?(Toast.success(t('settings.importOk')),App.rerender()):Toast.error(t('settings.importErr'));};r.readAsText(f);};i.click();}
   function clearData(){Modal.confirm({title:t('settings.clear'),text:t('settings.clearConfirm'),danger:true,onConfirm(){Store.clearAll();App.rerender();}});}
   function setNotif(on){ Store.setNotificationsEnabled(on); if(on && typeof Notify!=='undefined') Notify.ensurePermission(); }
+  function downloadApk(){const a=document.createElement('a');a.href='dist/iHateDDL.apk';a.download='iHateDDL.apk';a.click();}
 
-  return {render,setLang,setTheme,exportData,importData,clearData,setNotif};
+  return {render,setLang,setTheme,exportData,importData,clearData,setNotif,downloadApk};
 })();
