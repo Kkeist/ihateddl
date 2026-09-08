@@ -54,7 +54,7 @@ I18N.register('zh', {
     dateDigits:'YYYYMMDD 或 YYYY-MM-DD',
     pickCal:'小日历',
     dropped:'已丢弃', bonusTag:'+bonus', milestone:'节点', addMs:'添加节点',
-    total:'共',
+    dropOf:'共 {n} 项',
     reminder:'提醒', reminderBefore:'提前', reminderDays:'天', reminderHours:'时', reminderMins:'分',
     reminderHint:'提前多久提醒（都留空＝不提醒）', reminderNeedDdl:'先填截止日期才能设提醒',
   },
@@ -95,6 +95,7 @@ I18N.register('zh', {
     data:'数据', display:'显示', info:'关于', notify:'提醒',
     replay:'重新查看引导',
     notifications:'DDL 提醒通知', notificationsDesc:'到提醒时间推送本地通知',
+    android:'Android 版', downloadApk:'下载安装包',
   },
   common: {
     cancel:'取消', confirm:'确认', save:'保存', delete:'删除', badDate:'请输入有效日期：8 位 YYYYMMDD，或 YYYY-MM-DD',
@@ -152,7 +153,7 @@ I18N.register('en', {
     dateDigits:'YYYYMMDD or YYYY-MM-DD',
     pickCal:'Mini calendar',
     dropped:'Dropped', bonusTag:'+bonus', milestone:'Milestone', addMs:'Add Milestone',
-    total:'Total',
+    dropOf:'of {n}',
     reminder:'Reminder', reminderBefore:'Before', reminderDays:'d', reminderHours:'h', reminderMins:'m',
     reminderHint:'How early to remind (all blank = off)', reminderNeedDdl:'Set a deadline first to add a reminder',
   },
@@ -193,6 +194,7 @@ I18N.register('en', {
     data:'Data', display:'Display', info:'About', notify:'Reminders',
     replay:'Replay Tutorial',
     notifications:'DDL reminders', notificationsDesc:'Send a local notification at the reminder time',
+    android:'Android', downloadApk:'Download APK',
   },
   common: {
     cancel:'Cancel', confirm:'Confirm', save:'Save', delete:'Delete', badDate:'Enter a valid date: YYYYMMDD or YYYY-MM-DD',

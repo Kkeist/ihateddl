@@ -15,6 +15,9 @@
   /* Borders */
   --bd:rgba(80,60,30,.08); --bd-s:rgba(80,60,30,.04);
 
+  /* Toggle track, off state */
+  --tgl-off:#d9cdb8;
+
   /* Text */
   --t1:#3d3225; --t2:#8c7a65; --t3:#b5a593;
 
@@ -71,7 +74,7 @@
 [data-theme="dark"]{
   --bg:#0c0e14; --bg2:#12151f; --grid:rgba(180,190,220,.035);
   --srf:#161a26; --srf-h:#1c2130; --srf-a:#242a3a;
-  --bd:rgba(255,255,255,.08); --bd-s:rgba(255,255,255,.045);
+  --bd:rgba(255,255,255,.08); --bd-s:rgba(255,255,255,.045); --tgl-off:#333a4d;
   --t1:#eceef4; --t2:#9498a8; --t3:#5e6274;
   --ac:#f0a070; --ac-h:#e88855; --ac-bg:rgba(240,160,112,.12); --ac-t:#1a120e;
   --ok:#7dce8c; --ok-bg:rgba(125,206,140,.1);
@@ -95,7 +98,7 @@
 [data-theme="purple"]{
   --bg:#ebe4f2; --bg2:#e0d6eb; --grid:rgba(110,80,150,.065);
   --srf:#fdfbff; --srf-h:#f7f2fc; --srf-a:#ede6f5;
-  --bd:rgba(70,40,100,.09); --bd-s:rgba(70,40,100,.05);
+  --bd:rgba(70,40,100,.09); --bd-s:rgba(70,40,100,.05); --tgl-off:#cfc2de;
   --t1:#2d1f42; --t2:#6b5a82; --t3:#9a8ab0;
   --ac:#7d5dae; --ac-h:#6a4a9a; --ac-bg:rgba(125,93,174,.1); --ac-t:#fff;
   --ok:#4f9d7a; --ok-bg:rgba(79,157,122,.08);
@@ -121,7 +124,7 @@
 [data-theme="ocean"]{
   --bg:#ddeef4; --bg2:#cfe5ed; --grid:rgba(40,120,140,.075);
   --srf:#f6fdff; --srf-h:#ecf8fb; --srf-a:#dceef3;
-  --bd:rgba(30,90,105,.1); --bd-s:rgba(30,90,105,.05);
+  --bd:rgba(30,90,105,.1); --bd-s:rgba(30,90,105,.05); --tgl-off:#b9d8e2;
   --t1:#143844; --t2:#4a7584; --t3:#7a9da8;
   --ac:#2d8fa8; --ac-h:#267a91; --ac-bg:rgba(45,143,168,.11); --ac-t:#fff;
   --ok:#3d9b7a; --ok-bg:rgba(61,155,122,.09);
@@ -426,7 +429,7 @@ img,svg{display:block}
 
 .fta{
   width:100%;padding:9px 13px;border:1.5px solid var(--bd);border-radius:var(--r-xs);
-  background:var(--srf);font-size:var(--fs-input);resize:vertical;min-height:68px;outline:none;
+  background:var(--srf);font-size:var(--fs-input);resize:none;height:68px;overflow-y:auto;outline:none;
   transition:all var(--dur) var(--ease);
 }
 .fta:focus{border-color:var(--ac);box-shadow:0 0 0 3px var(--ac-bg),0 2px 8px rgba(212,114,78,.06)}
@@ -435,7 +438,7 @@ img,svg{display:block}
 /* Toggle — with glow */
 .tgl{position:relative;width:38px;height:22px;flex-shrink:0}
 .tgl input{opacity:0;width:0;height:0;position:absolute}
-.tgl-t{position:absolute;inset:0;background:var(--bg2);border-radius:var(--r);cursor:pointer;transition:all .25s var(--ease)}
+.tgl-t{position:absolute;inset:0;background:var(--tgl-off);border-radius:var(--r);cursor:pointer;transition:all .25s var(--ease)}
 .tgl-t::after{content:'';position:absolute;width:18px;height:18px;background:#fff;border-radius:50%;top:2px;left:2px;box-shadow:0 1px 3px rgba(0,0,0,.15);transition:all .25s var(--ease)}
 .tgl input:checked+.tgl-t{background:var(--ac);box-shadow:0 0 10px var(--ac-bg)}
 .tgl input:checked+.tgl-t::after{transform:translateX(16px)}
@@ -641,7 +644,7 @@ img,svg{display:block}
 
 .flds{display:flex;flex-direction:column;gap:10px;margin-top:10px}
 .fld{display:flex;align-items:center;gap:10px}
-.fld-l{font-size:var(--fs-xs);font-weight:600;color:var(--t3);width:58px;flex-shrink:0;text-transform:uppercase;letter-spacing:.04em}
+.fld-l{font-size:var(--fs-sm);font-weight:600;color:var(--t3);width:58px;flex-shrink:0;text-transform:uppercase;letter-spacing:.04em}
 .fld-v{flex:1;font-size:var(--fs-md)}
 .dur-prep{margin-top:8px;border:1px solid var(--bd-s);border-radius:var(--r-xs);background:var(--srf-a);overflow:hidden}
 .dur-prep>summary{cursor:pointer;padding:8px 12px;font-size:var(--fs-xs);font-weight:600;color:var(--t2);list-style:none;transition:background var(--dur)}
@@ -798,6 +801,9 @@ img,svg{display:block}
 
 /* ===== DESKTOP ===== */
 @media(min-width:768px){
+  /* 16px 仅移动端需要（防 iOS 聚焦缩放），桌面回到正文字号 */
+  :root{--fs-input:14px}
+
   #app{flex-direction:column;padding-top:0}
   #app-header{display:none}
 

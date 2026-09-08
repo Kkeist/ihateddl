@@ -56,7 +56,7 @@ const EditorView = (() => {
       <div class="ed-root" id="ed-tree">${rn(root,true)}</div>`;
   }
 
-  function rn(node, isRoot) {
+  function rn(node, isRoot, share) {
     const op = _open.has(node.id);
     const sc = calcNodeScore(node, _plan?_po:{});
     const ss = fmtNodeScore(node, sc);
@@ -80,20 +80,23 @@ const EditorView = (() => {
       </div>`;
     }
 
+    const shownPct = share != null ? Math.round(share * 100) / 100 : node.percentage;
     const pctD = !isRoot ? (node.bonus
       ? `<span class="chip" style="font-size:10px">+${node.percentage}%</span>`
-      : `<span class="tn-pct">${node.percentage}%</span>`) : '';
+      : `<span class="tn-pct">${shownPct}%</span>`) : '';
     const scD = ss ? `<span class="tn-score" style="color:${scoreColor(sc)}">${ss}</span>` : '';
 
     let kids = '';
     if (node.type==='group' && op) {
       const di = getDividedDropInfo(node,_plan?_po:{});
+      const nb = (node.children||[]).filter(c=>!c.bonus).length;
+      const share = node.groupType==='divided' && nb ? (node.percentage||0)/nb : null;
       let ch = '';
       (node.children||[]).forEach(c => {
         const drop = di.droppedIds&&di.droppedIds.has(c.id);
         ch += `<div style="${drop?'opacity:.4':''}">`;
         if (drop) ch += `<div style="font-size:10px;color:var(--t3);font-weight:600;margin-bottom:2px">${t('editor.dropped')}</div>`;
-        ch += rn(c,false) + '</div>';
+        ch += rn(c,false,c.bonus?null:share) + '</div>';
       });
       kids = `<div class="tn-kids">${ch}</div>`;
       kids += `<div style="display:flex;gap:6px;margin-top:8px;margin-left:12px" onclick="event.stopPropagation()">
@@ -141,7 +144,7 @@ const EditorView = (() => {
       h += `<div class="fld"><span class="fld-l">${t('editor.drop')}</span><div class="fld-v" onclick="event.stopPropagation()">
         <input type="number" class="il" min="0" max="${Math.max(0,cc-1)}" value="${node.itemDrop||0}" style="width:46px"
           onchange="EditorView.uf('${node.id}','itemDrop',parseInt(this.value)||0)">
-        <span style="color:var(--t3);font-size:11px;margin-left:4px">/ ${cc} ${t('editor.total')}</span></div></div>`;
+        <span style="color:var(--t3);font-size:var(--fs-sm);margin-left:6px">${t('editor.dropOf',{n:cc})}</span></div></div>`;
     }
     if (node.type==='item') {
       const cv=node.scoreCurr!=null?node.scoreCurr:'', ov=node.scoreOutOf!=null?node.scoreOutOf:'';
@@ -220,7 +223,7 @@ const EditorView = (() => {
       </details></div>`;
     h += `<div class="fld" style="flex-direction:column;align-items:flex-start" onclick="event.stopPropagation()">
       <span class="fld-l">${t('editor.detail')}</span>
-      <textarea class="fta" style="margin-top:4px;width:100%;min-height:50px" placeholder="${t('editor.detail')}..."
+      <textarea class="fta" style="margin-top:4px;width:100%" placeholder="${t('editor.detail')}..."
         onchange="EditorView.uf('${node.id}','detail',this.value)">${escHtml(node.detail||'')}</textarea></div>`;
     const ms=node.milestones||[];
     h += `<div class="fld" style="flex-direction:column;align-items:flex-start" onclick="event.stopPropagation()">
