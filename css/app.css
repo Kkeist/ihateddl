@@ -872,3 +872,41 @@ img,svg{display:block}
 
   .li-grid{grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px}
 }
+
+/* 工作室标注 */
+/* 头像在文字左边、上下居中 */
+.kk-credit{
+  box-sizing:border-box;
+  display:flex;flex-direction:row;align-items:center;gap:10px;
+  /* 中文三行的高度：英文只有两行，盒子也保持同样大小 */
+  min-height:84px;
+  margin:20px 0 0;padding:10px;
+  border:1px solid var(--bd);border-radius:var(--r-sm);background:var(--srf);
+  color:var(--t3);font-size:12px;line-height:1.7;
+}
+.kk-credit-avatar{
+  flex:none;width:44px;height:44px;
+  border-radius:var(--r-sm);object-fit:cover;
+}
+.kk-credit-text{flex:1;min-width:0}
+.kk-credit-text p{margin:0;word-break:break-word}
+/* 第二行与链接行接排，整块凑成两行 */
+.kk-credit-text p:nth-of-type(2),
+.kk-credit-text p:nth-of-type(3){display:inline}
+
+/* 链接跟着第二行接排，不另起一行 */
+.kk-credit-link {
+  display: inline;
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* 左对齐，防止被容器的居中样式盖掉 */
+.kk-credit,
+.kk-credit .kk-credit-text,
+.kk-credit .kk-credit-text p {
+  text-align: left;
+}
+

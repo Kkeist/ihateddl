@@ -10,6 +10,7 @@ const SettingsView = (() => {
     ];
     const langs=I18N.list();
     const nativeApp=typeof Notify!=='undefined'&&Notify.isNative();
+    const creditAlias=t('credit.alias');
 
     el.innerHTML=`
       <div class="pg-hdr"><h2 class="heading-lg">${t('settings.title')}</h2></div>
@@ -61,6 +62,14 @@ const SettingsView = (() => {
       <div class="st-sec">
         <div class="st-row"><span class="st-row-l">${t('settings.about')}</span><span class="st-row-r">${t('settings.version')}</span></div>
         <div style="padding:10px 16px;font-size:12px;color:var(--t3);line-height:1.6">${t('settings.aboutText')}</div>
+      </div>
+
+      <div class="kk-credit">
+        <img class="kk-credit-avatar" src="${t('credit.avatar')}" alt="">
+        <div class="kk-credit-text">
+          <p>${t('credit.author')}</p>
+${creditAlias?`<p>${creditAlias}</p>`:''}<p><a class="kk-credit-link" href="${t('credit.site')}" target="_blank" rel="noopener">${t('credit.link')}</a></p>
+        </div>
       </div>
 
       <div style="text-align:center;margin:24px 0 40px">
