@@ -64,12 +64,12 @@ const SettingsView = (() => {
         <div style="padding:10px 16px;font-size:12px;color:var(--t3);line-height:1.6">${t('settings.aboutText')}</div>
       </div>
 
+      <div class="kk-legal-line"><a class="kk-legal-link" href="${t('legal.url')}" target="_blank" rel="noopener">${t('legal.title')}</a></div>
       <div class="kk-credit">
         <img class="kk-credit-avatar" src="${t('credit.avatar')}" alt="">
         <div class="kk-credit-text">
           <p>${t('credit.author')}</p>
 ${creditAlias?`<p>${creditAlias}</p>`:''}<p><a class="kk-credit-link" href="${t('credit.site')}" target="_blank" rel="noopener">${t('credit.link')}</a></p>
-          <p class="kk-credit-legal"><a class="kk-credit-link" href="${t('legal.url')}" target="_blank" rel="noopener">${t('legal.title')}</a></p>
         </div>
       </div>
 

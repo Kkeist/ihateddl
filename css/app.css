@@ -893,8 +893,11 @@ img,svg{display:block}
 /* 第二行与链接行接排，整块凑成两行 */
 .kk-credit-text p:nth-of-type(2),
 .kk-credit-text p:nth-of-type(3){display:inline}
-/* 条款链接单独一行，不被上面的接排规则并到链接行里 */
-.kk-credit-text p.kk-credit-legal{display:block}
+/* 法律说明链接：署名框紧上方一行小字，和框之间留半行 */
+.kk-legal-line{margin:20px 0 6px;color:var(--t3);font-size:11px;line-height:1.6;text-align:left}
+.kk-legal-line + .kk-credit{margin-top:0}
+.kk-legal-link{position:relative;display:inline-block;color:inherit;text-decoration:underline;text-underline-offset:2px;-webkit-tap-highlight-color:transparent}
+.kk-legal-link::after{content:'';position:absolute;top:-16px;right:-8px;bottom:-16px;left:-8px}
 
 /* 链接跟着第二行接排，不另起一行 */
 .kk-credit-link {
