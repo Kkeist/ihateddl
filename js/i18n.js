@@ -105,6 +105,10 @@ I18N.register('zh', {
     link:'哐哐的个人站。',
     site:'https://kb.kkeist.com/',
   },
+  legal: {
+    title:'隐私与条款',
+    url:'https://kb.kkeist.com/legal/',
+  },
   common: {
     cancel:'取消', confirm:'确认', save:'保存', delete:'删除', badDate:'请输入有效日期：8 位 YYYYMMDD，或 YYYY-MM-DD',
     saveFail:'保存失败：存储空间已满，这次改动未能存住',
@@ -210,6 +214,10 @@ I18N.register('en', {
     alias:'',
     link:'Personal site',
     site:'https://kk.kkeist.com/',
+  },
+  legal: {
+    title:'Privacy and terms',
+    url:'https://kk.kkeist.com/legal/',
   },
   common: {
     cancel:'Cancel', confirm:'Confirm', save:'Save', delete:'Delete', badDate:'Enter a valid date: YYYYMMDD or YYYY-MM-DD',

@@ -69,6 +69,7 @@ const SettingsView = (() => {
         <div class="kk-credit-text">
           <p>${t('credit.author')}</p>
 ${creditAlias?`<p>${creditAlias}</p>`:''}<p><a class="kk-credit-link" href="${t('credit.site')}" target="_blank" rel="noopener">${t('credit.link')}</a></p>
+          <p class="kk-credit-legal"><a class="kk-credit-link" href="${t('legal.url')}" target="_blank" rel="noopener">${t('legal.title')}</a></p>
         </div>
       </div>
 
